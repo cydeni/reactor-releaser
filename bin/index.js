@@ -16,6 +16,10 @@
 const argv = require('yargs')
   .usage('Usage: $0 [options]')
   .options({
+    'access-token': {
+      type: 'string',
+      describe: 'For authentication using an Adobe I/O integration.'
+    },
     'private-key': {
       type: 'string',
       describe:
@@ -103,7 +107,7 @@ const getTechnicalAccountData = require('./getTechnicalAccountData');
       envSpecificConfig,
       argv
     );
-    const integrationAccessToken = await getIntegrationAccessToken(
+    const integrationAccessToken = argv.accessToken || await getIntegrationAccessToken(
       envSpecificConfig,
       technicalAccountData
     );
