@@ -103,10 +103,11 @@ const getTechnicalAccountData = require('./getTechnicalAccountData');
       console.log(chalk.bold.red("Prefer usage of '--environment=stage'."));
     }
     const envSpecificConfig = envConfig[environment];
-    const technicalAccountData = await getTechnicalAccountData(
+    const technicalAccountData = argv.accessToken ? { apiKey: argv.apiKey } : await getTechnicalAccountData(
       envSpecificConfig,
       argv
     );
+    console.log("techAccountData: ", technicalAccountData)
     const integrationAccessToken = argv.accessToken || await getIntegrationAccessToken(
       envSpecificConfig,
       technicalAccountData
